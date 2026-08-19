@@ -1,0 +1,36 @@
+server:
+  url: "ws://localhost:8000/ws/trades"
+  access_token: ""
+  token_file: "token.json"
+  reconnect_delay_seconds: 5
+  ping_interval_seconds: 30
+
+accounts:
+  # Due installazioni MT5 SEPARATE — stesso terminal_path non funziona per hedging Prop/Broker.
+  account1:
+    login: 12345678
+    password: "password"
+    server: "Broker-Server"
+    terminal_path: "C:/MT5_Prop/terminal64.exe"
+    portable: true
+  account2:
+    login: 87654321
+    password: "password"
+    server: "Broker-Server"
+    terminal_path: "C:/MT5_Broker/terminal64.exe"
+    portable: true
+
+trading:
+  symbol: "XAUUSD"
+  # Mappa simbolo logico → nome MT5 per login (ogni broker può chiamare l'oro diversamente).
+  symbol_map:
+    XAUUSD:
+      by_login:
+        12345678: "XAUUSD"
+        87654321: "XAUUSDm"
+  price_interval_seconds: 1
+  # Intervallo controllo posizioni aperte su entrambi i MT5 (chiusura incrociata).
+  position_sync_interval_seconds: 0.2
+  deviation: 20
+  magic_number: 20260524
+  default_comment: "ws-trader"
